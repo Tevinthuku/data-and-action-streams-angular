@@ -1,0 +1,48 @@
+<p>listusers works!</p>
+<label
+  ><input
+    type="radio"
+    name="role"
+    value="0"
+    (click)="filterUsers(0)"
+  />all</label
+>
+<br />
+<label
+  ><input
+    type="radio"
+    name="role"
+    value="true"
+    (click)="filterUsers(true)"
+  />Admins</label
+>
+<label
+  ><input
+    type="radio"
+    name="role"
+    value="false"
+    (click)="filterUsers(false)"
+  />Regular users</label
+>
+
+<div class="card-body" *ngIf="users$ | async as users">
+  <h1>Hello users</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Is Admin</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let user of users">
+      <tr>
+        <td>
+          {{ user.email }}
+        </td>
+        <td>
+          {{ user.isAdmin }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
