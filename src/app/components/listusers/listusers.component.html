@@ -25,7 +25,7 @@
   />Regular users</label
 >
 
-<div class="card-body" *ngIf="users$ | async as users">
+<div class="card-body" *ngIf="users$ | async as users; else loading">
   <h1>Hello users</h1>
   <table>
     <thead>
@@ -46,3 +46,10 @@
     </tbody>
   </table>
 </div>
+
+<ng-template #loading>
+  <br />
+  <h1>
+    Loading users...
+  </h1>
+</ng-template>

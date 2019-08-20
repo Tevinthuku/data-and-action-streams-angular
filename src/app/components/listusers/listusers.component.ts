@@ -9,7 +9,7 @@ import { ListusersService } from "../../services/listusers.service";
   templateUrl: "./listusers.component.html",
   styleUrls: ["./listusers.component.css"]
 })
-export class ListusersComponent implements OnInit {
+export class ListusersComponent {
   private errorMessageSubject = new Subject<string>();
   errorMessage$ = this.errorMessageSubject.asObservable();
 
@@ -21,8 +21,11 @@ export class ListusersComponent implements OnInit {
     map(([users, filterSelection]) =>
       users.filter(user => {
         console.log(filterSelection);
-        if (typeof filterSelection === "number") return true;
-        else return user.isAdmin === filterSelection;
+        if (typeof filterSelection === "number") {
+          return true;
+        } else {
+          return user.isAdmin === filterSelection;
+        }
       })
     ),
     catchError(err => {
@@ -31,8 +34,6 @@ export class ListusersComponent implements OnInit {
     })
   );
   constructor(private list: ListusersService) {}
-
-  ngOnInit() {}
 
   filterUsers(param: number | boolean) {
     this.userFilterSubject.next(param);
